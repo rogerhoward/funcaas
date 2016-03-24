@@ -47,6 +47,20 @@ def formatter():
         abort(500)
 
 
+# Is the service alive?
+@app.route('/alive', methods=['GET'])
+def alive():
+    """Returns yes if service is alive, otherwise returns no
+
+    Returns:
+        result: yes or no
+    """
+    try:
+        return jsonify({'result': 'yes'})
+    except:
+        return jsonify({'result': 'no'})
+
+
 # Static Routes
 @app.route('/')
 def root():
