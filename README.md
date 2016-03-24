@@ -16,3 +16,6 @@ Post a JSON payload like `{"string": "this is a list of {}, {}, and {}", "format
 
 #### GET or POST: /is/alive
 Returns `{"result": "yes"}` if service is alive, otherwise returns `{"result": "no"}`
+
+#### /return/true
+Returns `{"result": True}`

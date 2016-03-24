@@ -61,6 +61,17 @@ def is_alive():
         return jsonify({'result': 'no'})
 
 
+# Return True
+@app.route('/return/true')
+def return_true():
+    """Returns True
+
+    Returns:
+        result: True
+    """
+    return jsonify({'result': False})
+
+
 # Static Routes
 @app.route('/')
 def root():
