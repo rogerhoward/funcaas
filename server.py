@@ -21,7 +21,7 @@ def is_int(value):
     """
 
     try:
-        value_as_int = int(value)
+        int(value)
         return jsonify({'response':True})
     except:
         return jsonify({'response':False})
