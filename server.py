@@ -26,6 +26,7 @@ def is_int(value):
     except:
         return jsonify({'response':False})
 
+
 # Deploy project
 @app.route('/format', methods=['POST'])
 def formatter():
@@ -44,6 +45,17 @@ def formatter():
         return jsonify({'result': output_string})
     except:
         abort(500)
+
+
+# Static Routes
+@app.route('/')
+def root():
+    return app.send_static_file('index.html')
+
+
+@app.route('/<path:path>')
+def static_proxy(path):
+    return app.send_static_file(path)
 
 
 if __name__ == '__main__':
