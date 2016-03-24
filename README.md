@@ -13,3 +13,6 @@ This method returns `{"result": True}` if _n_ is integer-ish, and `{"result": Fa
 
 #### /format
 Post a JSON payload like `{"string": "this is a list of {}, {}, and {}", "formatter", ["a", "b", "c"]}` using Python 3-style .format() semantics and you'll receive a response like `{"result": "this is a list of a, b, and c"}`, or an HTTP 500 on error.
+
+#### /alive
+Returns `{"result": "yes"}` if service is alive, otherwise returns `{"result": "no"}`
