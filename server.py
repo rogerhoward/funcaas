@@ -26,6 +26,25 @@ def is_int(value):
     except:
         return jsonify({'response':False})
 
+# Deploy project
+@app.route('/format', methods=['POST'])
+def formatter():
+    """Formats a string using Python 3-style format()
+
+    Args:
+        string: the string to format
+        formatter: an array of values to pass to the format() method
+
+    Returns:
+        result: JSON with result
+    """
+    try:
+        payload = request.get_json()
+        output_string = payload['string'].format(*payload['formatter'])
+        return jsonify({'result': output_string})
+    except:
+        abort(500)
+
 
 if __name__ == '__main__':
     app.run(debug=config.debug, host='0.0.0.0', port=5000)
