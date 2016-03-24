@@ -5,3 +5,11 @@ Staring at your belly button and wondering who really needs containers? Starting
 
 1. Proper pronunciation is Funk-Ass.
 2. Uptime not guaranteed.
+
+### Methods Documentation
+
+#### /is/int/n
+This method returns `{"result": True}` if _n_ is integer-ish, and `{"result": False}` otherwise.
+
+#### /format
+Post a JSON payload like `{"string": "this is a list of {}, {}, and {}", "formatter", ["a", "b", "c"]}` using Python 3-style .format() semantics and you'll receive a response like `{"result": "this is a list of a, b, and c"}`, or an HTTP 500 on error.
