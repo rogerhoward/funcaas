@@ -17,5 +17,5 @@ Post a JSON payload like `{"string": "this is a list of {}, {}, and {}", "format
 #### GET or POST: /is/alive
 Returns `{"result": "yes"}` if service is alive, otherwise returns `{"result": "no"}`
 
-#### GET or POST: /return/true
-Returns `{"result": True}`
+#### GET or POST: /return/true?mode=strict
+Returns `{"result": True}` in strict mode, or otherwise `{"result": False}` for backwards compatibility.

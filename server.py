@@ -64,12 +64,16 @@ def is_alive():
 # Return True
 @app.route('/return/true')
 def return_true():
-    """Returns True
+    """Returns True in Strict mode, or False for backwards compatibility.
 
     Returns:
-        result: True
+        result: True or False, depending on ?mode
     """
-    return jsonify({'result': False})
+
+    if request.args.get('mode') == 'strict':
+        return jsonify({'result': True})
+    else:
+        return jsonify({'result': False})
 
 
 # Static Routes
