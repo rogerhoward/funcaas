@@ -48,8 +48,8 @@ def formatter():
 
 
 # Is the service alive?
-@app.route('/alive', methods=['GET'])
-def alive():
+@app.route('/is/alive')
+def is_alive():
     """Returns yes if service is alive, otherwise returns no
 
     Returns:
