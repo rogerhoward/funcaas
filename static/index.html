@@ -60,7 +60,7 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">/is/int/n</h3>
+          <h3 class="panel-title"><code>GET</code> /is/int/n</h3>
         </div>
         <div class="panel-body">
           This method returns <code>{"result": True}</code> if <i>n</i> is integer-ish, and <code>{"result": False}</code> otherwise.
@@ -70,7 +70,7 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">/format</h3>
+          <h3 class="panel-title"><code>POST</code> /format</h3>
         </div>
         <div class="panel-body">
           POST a JSON payload like <code>{"string": "this is a list of {}, {}, and {}", "formatter", ["a", "b", "c"]}</code> using <a href="https://pyformat.info/">Python 3-style .format() semantics</a> and you'll receive a response like <code>{"result": "this is a list of a, b, and c"}</code>, or an HTTP 500 on error.
@@ -80,7 +80,7 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">/alive</h3>
+          <h3 class="panel-title"><code>GET or POST</code> /is/alive</h3>
         </div>
         <div class="panel-body">
           Returns <code>{"result": "yes"}</code> if service is alive, otherwise returns <code>{"result": "no"}</code>
