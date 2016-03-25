@@ -21,4 +21,4 @@ for loader, mod_name, ispkg in modules:
                 app.register_blueprint(obj)
 
 
-app.run(debug=config.debug, host='0.0.0.0', port=5000)
+app.run(debug=config.debug, host=config.host, port=config.port)
