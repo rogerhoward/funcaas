@@ -1,91 +1,24 @@
 #!/usr/bin/env python
 
-import json, os, sys
-import config
-from flask import Flask, Response, send_file, jsonify, abort, request
+"""Server run file.
 
+Run by './server.py'
+Access properties as 'config.property'
+"""
+
+import pkgutil, sys
+from flask import Flask, Blueprint, render_template, request
+import config
 app = Flask(__name__)
 
 
-# Deploy project
-@app.route('/is/int/<value>', methods=['GET'])
-def is_int(value):
-    """Receives value and returns if it looks and smells
-       like an int
-
-    Args:
-        value: the value to test for int-ness
-
-    Returns:
-        bool: JSON with True or False
-    """
-
-    try:
-        int(value)
-        return jsonify({'response':True})
-    except:
-        return jsonify({'response':False})
+modules = pkgutil.iter_modules(path=[config.modules_directory_name])
+for loader, mod_name, ispkg in modules:
+    if mod_name not in sys.modules:
+        loaded_mod = __import__(config.modules_directory_name + '.' + mod_name, fromlist=[mod_name])
+        for obj in vars(loaded_mod).values():
+            if isinstance(obj, Blueprint):
+                app.register_blueprint(obj)
 
 
-# Deploy project
-@app.route('/format', methods=['POST'])
-def formatter():
-    """Formats a string using Python 3-style format()
-
-    Args:
-        string: the string to format
-        formatter: an array of values to pass to the format() method
-
-    Returns:
-        result: JSON with result
-    """
-    try:
-        payload = request.get_json()
-        output_string = payload['string'].format(*payload['formatter'])
-        return jsonify({'result': output_string})
-    except:
-        abort(500)
-
-
-# Is the service alive?
-@app.route('/is/alive')
-def is_alive():
-    """Returns yes if service is alive, otherwise returns no
-
-    Returns:
-        result: yes or no
-    """
-    try:
-        return jsonify({'result': 'yes'})
-    except:
-        return jsonify({'result': 'no'})
-
-
-# Return True
-@app.route('/return/true')
-def return_true():
-    """Returns True in Strict mode, or False for backwards compatibility.
-
-    Returns:
-        result: True or False, depending on ?mode
-    """
-
-    if request.args.get('mode') == 'strict':
-        return jsonify({'result': True})
-    else:
-        return jsonify({'result': False})
-
-
-# Static Routes
-@app.route('/')
-def root():
-    return app.send_static_file('index.html')
-
-
-@app.route('/<path:path>')
-def static_proxy(path):
-    return app.send_static_file(path)
-
-
-if __name__ == '__main__':
-    app.run(debug=config.debug, host='0.0.0.0', port=5000)
+app.run(debug=config.debug, host=config.host, port=config.port)
