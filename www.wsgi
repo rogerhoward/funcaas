@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, config
 
 activate_this = os.path.join('/home/rogerhoward/.virtualenvs/funcaas/bin', 'activate_this.py')
 execfile(activate_this, dict(__file__=activate_this))
