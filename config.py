@@ -10,3 +10,5 @@ project_directory = os.path.dirname(os.path.realpath(__file__))
 
 log = True
 debug = True
+
+modules_dir = 'modules'

@@ -1,5 +1,7 @@
-from flask import Blueprint, jsonify
-utilities = Blueprint('utilities', __name__)
+from flask import Blueprint, jsonify, render_template
+import os
+name = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
+utilities = Blueprint(name, __name__, template_folder='templates')
 import config
 
 # Is the service alive?
@@ -43,3 +45,9 @@ def ping():
         return jsonify({'result': 'ping'})
     except:
         return jsonify({'result': 'gnip'})
+
+
+# Return module docs
+@utilities.route('/docs/{}'.format(name), methods=['GET'])
+def docs():
+    return render_template('{}.html'.format(name))

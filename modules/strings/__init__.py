@@ -1,5 +1,7 @@
-from flask import Blueprint, jsonify
-strings = Blueprint('strings', __name__)
+from flask import Blueprint, jsonify, render_template
+import os
+name = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
+strings = Blueprint(name, __name__, template_folder='templates')
 import config
 
 # Format string
@@ -20,3 +22,9 @@ def formatter():
         return jsonify({'result': output_string})
     except:
         abort(500)
+
+
+# Return module docs
+@strings.route('/docs/{}'.format(name), methods=['GET'])
+def docs():
+    return render_template('{}.html'.format(name))
