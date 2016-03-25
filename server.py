@@ -9,6 +9,7 @@ Access properties as 'config.property'
 import pkgutil, sys
 from flask import Flask, Blueprint, render_template, request
 import config
+
 app = Flask(__name__)
 
 
