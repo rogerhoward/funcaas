@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, render_template
+from flask import Blueprint, jsonify, render_template, abort, request
 import os
 name = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
 strings = Blueprint(name, __name__, template_folder='templates')
@@ -16,6 +16,8 @@ def formatter():
     Returns:
         result: JSON with result
     """
+    if config.debug: print('formatter', request.method, request.args)
+
     try:
         payload = request.get_json()
         output_string = payload['string'].format(*payload['formatter'])

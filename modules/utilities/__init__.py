@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, render_template
+from flask import Blueprint, jsonify, render_template, abort, request
 import os
 name = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
 utilities = Blueprint(name, __name__, template_folder='templates')
@@ -12,6 +12,7 @@ def is_alive():
     Returns:
         result: yes or no
     """
+    if config.debug: print('is_alive', request.method, request.args)
     try:
         return jsonify({'result': 'yes'})
     except:
@@ -26,6 +27,7 @@ def return_true():
     Returns:
         result: True or False, depending on ?mode
     """
+    if config.debug: print('return_true', request.method, request.args)
 
     if request.args.get('mode') == 'strict':
         return jsonify({'result': True})
@@ -41,6 +43,7 @@ def ping():
     Returns:
         result: ping or gnip
     """
+    if config.debug: print('ping', request.method, request.args)
     try:
         return jsonify({'result': 'ping'})
     except:
