@@ -20,4 +20,5 @@ for loader, mod_name, ispkg in modules:
             if isinstance(obj, Blueprint):
                 app.register_blueprint(obj)
 
-app.run(port=8888)
+if __name__ == '__main__':
+	app.run(port=8888)
