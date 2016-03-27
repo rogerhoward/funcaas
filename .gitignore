@@ -1,4 +1,5 @@
-static_run
+static_run/
+media/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
