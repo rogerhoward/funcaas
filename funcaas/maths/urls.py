@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.conf.urls import url
 
-# Create your views here.
+from . import views
+
+urlpatterns = [
+    url(r'^is/int/(.+)/$', views.is_int),
+    url(r'^docs/$', views.docs),
+]

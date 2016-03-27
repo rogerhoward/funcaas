@@ -15,6 +15,9 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+
+ASSETS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -39,9 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-INSTALLED_APPS += [
+CUSTOM_APPS = [
     'maths',
 ]
+INSTALLED_APPS += CUSTOM_APPS
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,10 +60,17 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'funcaas.urls'
 
+
+# --------------------------------------------------
+# Template settings
+# --------------------------------------------------
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),
+                 os.path.join(BASE_DIR, 'core/templates'),
+                 os.path.join(BASE_DIR, 'crunchy/templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,11 +83,49 @@ TEMPLATES = [
     },
 ]
 
+
+# --------------------------------------------------
+# Media files settings
+# --------------------------------------------------
+
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
+if not os.path.exists(MEDIA_ROOT):
+    os.makedirs(MEDIA_ROOT)
+
+MEDIA_URL = "/media/"
+
+
+# --------------------------------------------------
+# Static files settings
+# --------------------------------------------------
+
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static_run')
+if not os.path.exists(STATIC_ROOT):
+    os.makedirs(STATIC_ROOT)
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'core/static'),
+    os.path.join(BASE_DIR, 'maths/static'),
+    ]
+for static_dir in STATICFILES_DIRS:
+    if not os.path.exists(static_dir):
+        os.makedirs(static_dir)
+
+
+
+# --------------------------------------------------
+# WSGI settings
+# --------------------------------------------------
 WSGI_APPLICATION = 'funcaas.wsgi.application'
 
 
-# Database
+# --------------------------------------------------
+# Database settings
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
+# --------------------------------------------------
 
 DATABASES = {
     'default': {
@@ -85,9 +134,10 @@ DATABASES = {
     }
 }
 
-
+# --------------------------------------------------
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
+# --------------------------------------------------
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -104,9 +154,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+# --------------------------------------------------
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
+# --------------------------------------------------
 
 LANGUAGE_CODE = 'en-us'
 
@@ -118,8 +169,3 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-
-STATIC_URL = '/static/'

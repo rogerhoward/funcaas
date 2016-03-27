@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block callout %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Welcome to FuncAAS, the original Functions As A Service platform</h1>
+        <p>Staring at your belly button and wondering who really needs containers? Starting to think microservices have grown too large? Wish every function you needed for your next killer app was available with 92% uptime(2) just a simple jQuery.get() away?</p>
+      </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Modularity</h2>
+          <p>No longer is your application dependent on single-language-logic. Leveraging the latest in REST API design, Funcaas moves stdlib functionality out to the cloud where. Need a math function? Got it. Wondering if your array is an array? We can tell you.</p>
+        </div>
+        <div class="col-md-4">
+          <h2>Scalability</h2>
+          <p>With traditional runtimes and standard library functions, you never really know how far you can scale. After all, do you know how many times a second math.floor() can be called, or what your OS will charge you per invocation? Nope, neither do we. But with all your functions in the cloud, we can tell you exactly how slow and expensive these calls can be!</p>
+       </div>
+        <div class="col-md-4">
+          <h2>Robustability</h2>
+          <p>We've all been there. You call console.log() one too many times and your server crashes. Well, no more. With FuncAAS we can guarantee service levels up to and exceeding industry-standard <i>n</i> nines. Stop worrying about how you host your functions and jump on the FuncAAS bandwagon today!</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <h3>Funcaas libraries include:</h3>
+
+	  {% for module in modules %}
+	    <h4><a href="{{ module }}/docs/">{{ module }}</a></h4>
+	  {% endfor %}
+
+{% endblock %}
